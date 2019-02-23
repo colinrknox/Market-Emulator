@@ -1,4 +1,3 @@
-import os
 import unittest
 from src.sqlite import *
 
@@ -43,7 +42,3 @@ class TestCreateSqlite(unittest.TestCase):
         expected = f'SELECT * FROM {self.table_1};'
         actual = select_all_query.generate()
         self.assertEqual(expected, actual)
-
-
-if __name__ == '__main__':
-    unittest.main()
