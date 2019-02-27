@@ -2,6 +2,7 @@ import sys
 from rw import save_file, read_file
 from trade import get_price
 from portfolio import *
+from response import *
 
 def start_with_new_portfolio():
     return Portfolio(get_name())
@@ -34,12 +35,16 @@ if __name__ == '__main__':
                 portfolio.buy_stock(tokens[1], tokens[2], price)
             except ValueError as e:
                 print(e.message)
+            else:
+                print(BuyStockResponse.generate(tokens[1], tokens[2], price))
         elif tokens[0].lower() == 'sell':
             price = get_price(tokens[1])
             try:
                 portfolio.sell_stock(tokens[1], tokens[2], price)
             except ValueError as e:
                 print(e.message)
+            else:
+                print(SellStockResponse.generate(tokens[1], tokens[2], price))
         elif tokens[0].lower() == 'display':
             print(portfolio.get_portfolio())
         elif tokens[0].lower() == 'price':
