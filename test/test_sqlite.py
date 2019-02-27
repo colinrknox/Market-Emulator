@@ -1,7 +1,8 @@
 import unittest
 from src.sqlite import *
 
-class TestCreateSqlite(unittest.TestCase):
+class TestSqlite(unittest.TestCase):
+
     def setUp(self):
         self.table_1 = 'lol'
         self.columns_1 = {'id': 'INTEGER PRIMARY KEY',
