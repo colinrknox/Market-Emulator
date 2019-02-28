@@ -1,8 +1,7 @@
-import sys
-from rw import save_file, read_file
-from trade import get_price
-from portfolio import *
-from response import *
+from src.rw import save_file, read_file
+from src.trade import get_price
+from src.portfolio import *
+from src.response import *
 
 def start_with_new_portfolio():
     return Portfolio(get_name())
@@ -15,36 +14,31 @@ def load_portfolio(name):
     return Portfolio(data['name'], data['buy_power'], data['stocks'])
 
 
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        portfolio = start_with_new_portfolio()
-    elif len(sys.argv) == 2:
-        portfolio = load_portfolio(sys.argv[1])
+def read_eval_print_loop(file_name=None):
+    if file_name:
+        portfolio = load_portfolio(file_name)
     else:
-        print(f'Invalid number of arguments {len(sys.argv) - 1}')
-        print("Usage: engine.py {name} (optional)")
-        print("No arguments - You will be prompted to create a new portfolio")
-        print("{name} - the name of the portfolio that you wish to open should be in /resources")
-        exit()
+        portfolio = start_with_new_portfolio()
+
     while True:
         line = input('>>> ')
         tokens = line.split(' ')
         if tokens[0].lower() == 'buy':
-            price = get_price(tokens[1])
+            price = float(get_price(tokens[1]))
             try:
-                portfolio.buy_stock(tokens[1], tokens[2], price)
+                portfolio.buy_stock(tokens[1], int(tokens[2]), price)
             except ValueError as e:
                 print(e.message)
             else:
-                print(BuyStockResponse.generate(tokens[1], tokens[2], price))
+                print(BuyStockResponse.generate(tokens[1], int(tokens[2]), price))
         elif tokens[0].lower() == 'sell':
-            price = get_price(tokens[1])
+            price = float(get_price(tokens[1]))
             try:
-                portfolio.sell_stock(tokens[1], tokens[2], price)
+                portfolio.sell_stock(tokens[1], int(tokens[2]), price)
             except ValueError as e:
                 print(e.message)
             else:
-                print(SellStockResponse.generate(tokens[1], tokens[2], price))
+                print(SellStockResponse.generate(tokens[1], int(tokens[2]), price))
         elif tokens[0].lower() == 'display':
             print(portfolio.get_portfolio())
         elif tokens[0].lower() == 'price':
