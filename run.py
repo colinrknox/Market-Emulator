@@ -8,6 +8,6 @@ if __name__ == '__main__':
         read_eval_print_loop()
     else:
         print(f"Invalid number of arguments {len(sys.argv) - 1}")
-        print(f"Usage: engine.py {name} (optional)")
+        print("Usage: engine.py {name} (optional)")
         print("No arguments - You will be prompted to create a new portfolio")
-        print(f"{name} - the name of the portfolio that you wish to open should be in /resources")
+        print("{name} - the name of the portfolio that you wish to open should be in /resources")
