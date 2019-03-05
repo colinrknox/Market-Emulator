@@ -1,5 +1,6 @@
 import json
 
+# Portfolio data structure that only allows for buying, selling, and displaying the portfolio
 class Portfolio:
 
     def __init__(self, name, start_value=100000, stocks=None):

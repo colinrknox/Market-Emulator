@@ -9,6 +9,7 @@ LAST = '3. Last Refreshed'
 SERIES_1MIN = 'Time Series (1min)'
 LOW = "3. low"
 
+#Uses alphavantage API to pull pricing info
 def get_price(symbol):
     symbol_data = get_json_objects(PRICE_URL_PRE + symbol + PRICE_URL_POST)
     if not symbol_data:
@@ -17,6 +18,7 @@ def get_price(symbol):
     price_data = symbol_data[SERIES_1MIN]
     return price_data[last_refreshed][LOW]
 
+# Helper to load json objects from the alphavantage API
 def get_json_objects(url):
     response = requests.get(url)
     try:
