@@ -13,8 +13,10 @@ def load_portfolio(name):
     data = read_file(name)
     return Portfolio(data['name'], data['buy_power'], data['stocks'])
 
-
+# Takes in a potential file name to load from the ./resources folder
+# Loops infintely taking in commands defined by the CLI until an exit command is issued
 def read_eval_print_loop(file_name=None):
+    transaction_factory = TransactionResponseFactory()
     if file_name:
         portfolio = load_portfolio(file_name)
     else:
@@ -30,7 +32,7 @@ def read_eval_print_loop(file_name=None):
             except ValueError as e:
                 print(e.message)
             else:
-                print(BuyStockResponse.generate(tokens[1], int(tokens[2]), price))
+                print(transaction_factory.createResponse(tokens[0]).generate(tokens[1], int(tokens[2]), price))
         elif tokens[0].lower() == 'sell':
             price = float(get_price(tokens[1]))
             try:
@@ -38,7 +40,7 @@ def read_eval_print_loop(file_name=None):
             except ValueError as e:
                 print(e.message)
             else:
-                print(SellStockResponse.generate(tokens[1], int(tokens[2]), price))
+                print(transaction_factory.createResponse(tokens[0]).generate(tokens[1], int(tokens[2]), price))
         elif tokens[0].lower() == 'display':
             print(portfolio.get_portfolio())
         elif tokens[0].lower() == 'price':
