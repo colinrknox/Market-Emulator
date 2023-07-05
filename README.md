@@ -1,4 +1,4 @@
-An extremely basic Stock Market Emulator with persistence and the ability to run multiple portfolios.
+A basic Stock Market Emulator CLI with persistence and the ability to run multiple portfolios.
 
 Usage:
 run.py {file_name} (optional)
